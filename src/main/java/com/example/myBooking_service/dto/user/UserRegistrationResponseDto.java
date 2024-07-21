@@ -1,6 +1,6 @@
 package com.example.myBooking_service.dto.user;
 
-public class RegistrationUserResponseDto {
+public class UserRegistrationResponseDto {
     private Long id;
     private String email;
     private String firstName;
