@@ -12,7 +12,7 @@ import lombok.Setter;
 @FieldMatch(field = "password",
         fieldMatch = "repeatPassword",
         message = "Password fields must match")
-public class RegistrationUserRequestDto {
+public class UserRegistrationRequestDto {
     @NotBlank
     @Size(min = 8, max = 50)
     private String email;
