@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
         description = "Endpoints for management of role changes and user information")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(name = "/users")
+@RequestMapping(value = "/users")
 public class UserController {
     private final UserService userService;
 
