@@ -34,3 +34,4 @@ public class CreateAccommodationRequestDto {
     @NotNull
     private Integer availability;
 }
+
