@@ -8,7 +8,9 @@ import com.example.mybookingservice.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,13 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
         description = "Endpoints for management of role changes and user information")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(name = "/users")
+@RequestMapping(value = "/users")
 public class UserController {
     private final UserService userService;
 
     @Operation(summary = "Update role", description = "Endpoint for update users role")
-    // @PreAuthorize("hasRole('CUSTOMER') or hasRole('MANAGER')")
+    @PreAuthorize("hasRole('CUSTOMER') or hasRole('MANAGER')")
     @PutMapping("/{id}/role")
+    @CrossOrigin(origins = "http://127.0.0.1:5500")
     public UserRegistrationResponseDto updateRoleByUserId(
              @PathVariable Long id,
              @RequestBody UserUpdateRoleRequestDto requestDto) {
@@ -35,7 +38,7 @@ public class UserController {
 
     @Operation(summary = "Get current user",
             description = "Endpoint for get current user that is logged in")
-    @GetMapping("/users/me")
+    @GetMapping("/me")
     public UserRegistrationResponseDto getCurrentUser(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return userService.getCurrentUser(user.getId());
@@ -44,7 +47,7 @@ public class UserController {
     @Operation(summary = "Update information",
             description = "Endpoint for update information about"
             + "current user that is logged in")
-    @PutMapping("/users/me")
+    @PutMapping("/me")
     public UserRegistrationResponseDto updateInformation(
             Authentication authentication,
             @RequestBody UserUpdateInformationRequestDto requestDto) {

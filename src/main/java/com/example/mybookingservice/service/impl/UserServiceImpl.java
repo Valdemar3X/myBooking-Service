@@ -8,7 +8,7 @@ import com.example.mybookingservice.exception.EntityNotFoundException;
 import com.example.mybookingservice.exception.RegistrationException;
 import com.example.mybookingservice.mapper.UserMapper;
 import com.example.mybookingservice.model.User;
-import com.example.mybookingservice.repository.UserRepository;
+import com.example.mybookingservice.repository.user.UserRepository;
 import com.example.mybookingservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
