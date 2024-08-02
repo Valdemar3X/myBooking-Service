@@ -4,6 +4,7 @@ import com.example.mybookingservice.dto.accommodation.AccommodationResponseDto;
 import com.example.mybookingservice.dto.accommodation.CreateAccommodationRequestDto;
 import com.example.mybookingservice.service.AccommodationService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Accommodation management",
+        description = "Endpoints for management accommodations")
 @RestController
 @RequestMapping(value = "/accommodations")
 @RequiredArgsConstructor
@@ -61,7 +64,7 @@ public class AccommodationController {
     @Operation(summary = "Update accommodation", description = "Update accommodation by id")
     @PreAuthorize("hasRole('MANAGER')")
     @PutMapping("/{id}")
-    public AccommodationResponseDto updateBookById(@PathVariable Long id,
+    public AccommodationResponseDto updateByID(@PathVariable Long id,
                                   @RequestBody CreateAccommodationRequestDto requestDto) {
         return accommodationService.updateAccommodationById(id, requestDto);
     }

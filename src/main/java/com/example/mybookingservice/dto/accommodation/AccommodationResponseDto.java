@@ -11,7 +11,7 @@ import lombok.Setter;
 public class AccommodationResponseDto {
     private Long id;
     private Accommodation.TypeAccommodation type;
-    private Long locationId;
+    private AddressResponseDto addressResponseDto;
     private String size;
     private List<String> amenities;
     private BigDecimal dailyRate;

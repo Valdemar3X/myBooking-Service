@@ -4,11 +4,11 @@ import com.example.mybookingservice.dto.accommodation.AccommodationResponseDto;
 import com.example.mybookingservice.dto.accommodation.CreateAccommodationRequestDto;
 import com.example.mybookingservice.exception.EntityNotFoundException;
 import com.example.mybookingservice.mapper.AccommodationMapper;
+import com.example.mybookingservice.mapper.AddressMapper;
 import com.example.mybookingservice.model.Accommodation;
-import com.example.mybookingservice.repository.AccommodationRepository;
-import com.example.mybookingservice.repository.AddressRepository;
+import com.example.mybookingservice.repository.accommodation.AccommodationRepository;
+import com.example.mybookingservice.repository.accommodation.AddressRepository;
 import com.example.mybookingservice.service.AccommodationService;
-import com.example.mybookingservice.service.AddressService;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +21,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class AccommodationServiceImpl implements AccommodationService {
     private final AccommodationRepository accommodationRepository;
     private final AccommodationMapper accommodationMapper;
-    private final AddressService addressService;
     private final AddressRepository addressRepository;
+    private final AddressMapper addressMapper;
 
-    @Transactional
     @Override
     public AccommodationResponseDto save(CreateAccommodationRequestDto requestDto) {
-        Accommodation accommodation = accommodationMapper.toModel(requestDto, addressService);
+        Accommodation accommodation = accommodationMapper.toModel(requestDto);
         Accommodation savedAccommodation = accommodationRepository.save(accommodation);
         return accommodationMapper.toDto(savedAccommodation);
     }
@@ -57,10 +56,11 @@ public class AccommodationServiceImpl implements AccommodationService {
     @Override
     public AccommodationResponseDto updateAccommodationById(
             Long id, CreateAccommodationRequestDto requestDto) {
-        Accommodation accommodation = accommodationMapper.toModel(requestDto, addressService);
+        Accommodation accommodation = accommodationMapper.toModel(requestDto);
         Accommodation updateAccommodation = null;
         if (accommodationRepository.existsById(id)) {
             accommodation.setId(id);
+            accommodation.getLocation().setId(id);
             updateAccommodation = accommodationRepository.save(accommodation);
         } else {
             throw new EntityNotFoundException("can't find accommodation by id" + id);

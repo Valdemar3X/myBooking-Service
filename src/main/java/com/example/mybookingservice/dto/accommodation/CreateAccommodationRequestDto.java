@@ -18,8 +18,8 @@ public class CreateAccommodationRequestDto {
     @Enumerated(EnumType.STRING)
     private Accommodation.TypeAccommodation type;
 
-    @NotNull
-    private Long locationId;
+    @NotBlank
+    private CreateAddressRequestDto requestDto;
 
     @NotBlank
     private String size;
