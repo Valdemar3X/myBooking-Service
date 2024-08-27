@@ -2,7 +2,7 @@ package com.example.mybookingservice.service.impl;
 
 import com.example.mybookingservice.exception.EntityNotFoundException;
 import com.example.mybookingservice.model.Address;
-import com.example.mybookingservice.repository.AddressRepository;
+import com.example.mybookingservice.repository.accommodation.AddressRepository;
 import com.example.mybookingservice.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

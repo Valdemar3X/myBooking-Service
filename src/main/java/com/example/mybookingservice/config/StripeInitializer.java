@@ -3,9 +3,9 @@ package com.example.mybookingservice.config;
 import com.stripe.Stripe;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class StripeInitializer {
     private final StripeConfig stripeConfig;
 
